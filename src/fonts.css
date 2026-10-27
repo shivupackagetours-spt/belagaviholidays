@@ -1,0 +1,7 @@
+/* The site's faces. Imported before Tailwind because CSS requires a remote
+   @import at the top of the bundled sheet. Changing a face means changing this
+   import and the --font-* values in theme.css together.
+
+   Three faces, and no more: Fraunces carries headlines, Inter carries body and
+   form text. Inter does both the body and the label job, at two weights. */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');

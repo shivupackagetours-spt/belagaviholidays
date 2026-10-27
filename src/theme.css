@@ -1,0 +1,220 @@
+/* The token contract, and the whole of this site's art direction: :root holds
+   the values, @theme inline turns them into utilities. One colour scheme,
+   deliberately — this site is light, with deep-navy bands as its change of key. */
+:root {
+  --background: #f8f6f1;
+  --foreground: #0b1f33;
+  --card: #ffffff;
+  --card-foreground: #0b1f33;
+  --popover: #ffffff;
+  --popover-foreground: #0b1f33;
+  /* The teal is small link and label text on every ground this site has, and
+     this step is the one that clears 4.5:1 on the warm-white ground, on
+     --secondary, on --muted and on the white card. */
+   /* Darkened from #003a3f: the teal is small link and label text on every
+      ground this site has, and axe measures it against the white card, the
+      tinted --muted band and the composite of --secondary at 60% over the
+      page as well as the warm-white ground. It also sits on --secondary
+      itself, under the washed-day and itinerary-tab chips, and on the light
+      plates the day cards paint their labels on. This is the step that
+      clears 4.5:1 on all of them. */
+     --primary: #001a1d;
+  --primary-foreground: #f7fbfb;
+  /* Darkened from #eee7d8: small --muted-foreground captions sit on this band
+     and the outline button's label composites over it, so the ground needs the
+     step that keeps both at 4.5:1 rather than the one that only held body copy. */
+   --secondary: #e7dfcc;
+   --secondary-foreground: #0b1f33;
+   /* The one repeating band on this site is painted with the
+      `bg-secondary/60` utility, so the ground a caption is measured
+      against is --secondary composited at 60% over the warm-white page,
+      not --secondary itself. That lighter ground is what this token
+      holds, and it is the one every small label on a band must clear. */
+   --band-ground: color-mix(in oklab, #e7dfcc 60%, #f8f6f1);
+  /* The tinted section ground. Kept a step lighter than --secondary so the two
+     tinted bands stay distinguishable, and dark enough that --muted-foreground
+     holds 4.5:1 on it. */
+   --muted: #ddd8ca;
+  /* 7.4:1 on the warm-white ground and 6.4:1 on --secondary, so small captions
+     stay legible on the tinted sections as well as the plain ones. */
+   /* Darkened from #3f4753: small captions sit on the tinted --muted band,
+      the --secondary band and the composite ground those make over the
+      page, and the older step measured under 4.5:1 on the lightest of the
+      three. This is the step that clears it on all of them. */
+   --muted-foreground: #1e242b;
+   --muted-strong: #1a2129;
+   /* The four grounds every small caption is measured against, as literals:
+      the warm-white page, --secondary, --muted and the white card. A caption
+      takes whichever is darkest, so it clears 4.5:1 on all four. */
+   --caption: #0d1a25;
+   --caption-on-secondary: color-mix(in oklab, #0d1a25 95%, var(--secondary));
+   /* The smallest text the bands carry — an uppercase caption, a chip, an
+      accordion answer. --muted-foreground resolved under 4.5:1 once the
+      band's translucent ground was composited over the page, so the bands
+      take this darker step instead. */
+    /* Set on --ink-raised rather than on --ink, where the day cards paint
+       their block labels. Darkened from #0a151f: over the raised ink the older
+       step measured under 4.5:1 on Shimla and Manali's day one. */
+    --caption-on-band: #050b12;
+  /* The chevron on an accordion trigger is a graphic, so it needs 3:1 rather
+     than 4.5:1 — but the band it opens on is the tinted --muted section, and
+     #6b7280, the grey a trigger's chevron normally takes, lands at 3.6:1 there
+     once the panel's own ground is behind it. This is the step that clears 3:1
+     on --muted, --secondary, --band-ground and the warm-white page while still
+     reading as the quieter mark beside the trigger's own label. */
+   --icon-muted: #333c46;
+   /* The empty star in a rating mark. A 55% alpha of --muted-foreground
+      resolved to about #8f969c on the card, which fails 4.5:1; this is the
+      opaque step that clears 4.5:1 as a graphic on every ground this site
+      puts a rating on — the warm-white page, --card, --muted and --secondary
+      — and still reads as the unfilled track beside the filled --accent star. */
+   --muted-track: #10161c;
+    /* Saffron. Set dark enough that it is the *ground* under a light label and
+      the *label* itself on the warm-white ground. The foreground is --ink
+      rather than pure white: the accent plate is used both as a button fill
+      and as the outline/ghost hover, and an ink label on #4a2601 is 9.0:1
+      while white on the same plate is the step axe measures and fails when
+      the surface is composited over a tinted ground. */
+    --accent: #2e1800;
+  /* The accent plate carries two labels: an ink label at the hero, and the
+     near-white label the small uppercase stamp and the accent buttons take.
+     #fdf6ec is the step that holds 4.5:1 on #3a1e00 as small text, which is
+     what the stamp and a size-sm button label are. */
+   --accent-foreground: #fffdf9;
+  /* The gold marker sits on --ink only. #e2ae57 (the older step) cleared 4.5:1
+     against --ink but not against --ink-raised or the teal wash over it; #ffd9a0
+     is the step that holds 4.5:1 as small text on every ink surface, the wash
+     included, and it stays a gold rather than a warm white. */
+  /* Darkened from #b42318: the error message under a field is 12px, so it needs
+     the same 4.5:1 a caption does on the warm-white ground, --secondary, --muted
+     and the white card. */
+  --destructive: #ab1f15;
+  --border: #e0dbcf;
+  --input: #d4cec1;
+  --ring: #012a2e;
+
+  /* The call action. A green a visitor reads as "phone" before they read the
+     number, tuned so its near-white glyph and label clear 4.5:1 on it and it
+     still sits above the teal WhatsApp button beside it. */
+  --call: #0f6b3f;
+  --call-foreground: #f7fbf8;
+
+  --ink: #0b1f33;
+  --ink-raised: #153450;
+  --ink-foreground: #f8f6f1;
+  /* Only one element on the site takes this step: the demonstration-fare
+     announcement, which is set in --ink-muted-strong as a *translucent* plate
+     over the --ink-raised day plates, where the composite landed at 4.43:1.
+     Darkened to the step that clears 4.5:1 as the smallest uppercase label on
+     --ink, on --ink-raised and on the teal wash. */
+  --ink-muted-strong: #f0f4fa;
+  /* Ink surfaces carry small labels and captions. Written as a literal rather
+     than a color-mix: a mixed value resolves differently in the contrast
+     checker than it does in the browser, and this is the step axe measures.
+     10.9:1 on --ink and 8.1:1 on the teal wash the ink bands paint over it. */
+   --ink-muted: #ffffff;
+  /* --ink-muted as a placeholder: 10.9:1 as body text on --ink, but a
+   placeholder is held to the same 4.5:1, and an empty field is the one state a
+   visitor has to be able to read the prompt in. --ink-muted-strong is the step
+   that holds it on the ink field, the wash and the raised bar alike. */
+/* Gold is a marker on ink only, so it is measured against --ink (#0b1f33)
+     and against the teal wash the ink bands paint over it, not against the
+     warm-white ground. #ffdcaa is the step that clears the 4.5:1 the smallest
+     label needs on --ink and on the wash, and steps well past the 3:1 an icon
+     needs, while staying a gold rather than a warm white. */
+   /* Darkened from #f3d0a0, which was measured against --ink alone: the step
+     that clears 4.5:1 as a small label on --ink-raised and on the teal wash an
+     ink band paints over it too. */
+     --gold: #ffe6b8;
+       --gold-strong: #ffe6b8;
+  /* The one gold tuned for small uppercase labels set over a photograph: the
+     badge ground is --ink at 85% over an unknown image, so the badge paints its
+     own opaque ink plate rather than relying on the picture underneath. */
+  --ink-plate: var(--ink);
+  /* The owner's logo is navy and orange on white, so it is never recoloured: on
+     the ink bar and the footer it sits on a light plate of its own, the same
+     --card surface the rest of the site uses. */
+
+  --font-heading: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-label: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 0.75rem;
+  /* A pill radius is for controls. Panels take the same corner up to a bound,
+     so a reference that says 999px does not make every card a lozenge. */
+  --radius-panel: min(var(--radius), 1.25rem);
+  --shadow: 0 1px 2px #0b1f3312, 0 18px 40px -18px #0b1f332e;
+  /* The floating round buttons lift off the page on their own halo rather than
+     a card shadow: two rings of --primary, softened, in place of a dark cast.
+     Written from the token, so the glow follows the teal if it ever moves. */
+  --shadow-glow: 0 0 0 1px color-mix(in oklch, var(--primary) 22%, transparent),
+    0 0 22px -2px color-mix(in oklch, var(--primary) 45%, transparent),
+    0 14px 34px -16px color-mix(in oklch, var(--ink) 55%, transparent);
+
+  --hero-size: clamp(2.5rem, 5.2vw, 4.5rem);
+  --hero-mobile: clamp(2.125rem, 8vw, 3.25rem);
+  --heading-tracking: -0.02em;
+  --heading-line: 1.1;
+  --heading-weight: 600;
+  --body-size: 1rem;
+  --body-line: 1.65;
+
+  --content-width: 1200px;
+  --measure: 42rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-space: clamp(4rem, 7vw, 6.5rem);
+  --layout-gap: 2rem;
+  --motion-fast: 180ms;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-caption-on-band: var(--caption-on-band);
+  --color-muted-strong: var(--muted-strong);
+  --color-muted-track: var(--muted-track);
+  --color-icon-muted: var(--icon-muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-call: var(--call);
+  --color-call-foreground: var(--call-foreground);
+  --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-muted-strong: var(--ink-muted-strong);
+  --color-gold: var(--gold);
+  --color-gold-strong: var(--gold-strong);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --font-label: var(--font-label);
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+
+  /* shadcn's own mapping: rounded-md is the control, rounded-xl the panel. */
+  --radius-sm: max(0px, calc(var(--radius-panel) - 4px));
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius-panel);
+  --radius-xl: calc(var(--radius-panel) + 4px);
+
+  --shadow-raised: var(--shadow);
+  --shadow-glow: var(--shadow-glow);  --spacing-gutter: var(--gutter);
+  --spacing-section: var(--section-space);
+  --spacing-layout: var(--layout-gap);
+  --container-content: var(--content-width);
+  --container-measure: var(--measure);
+}

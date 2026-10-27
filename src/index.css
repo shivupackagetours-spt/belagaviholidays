@@ -1,0 +1,130 @@
+@import "./fonts.css";
+@import "tailwindcss";
+/* The enter/exit keyframes the ui primitives animate with. */
+@import "tw-animate-css";
+/* The token contract: a new art direction rewrites that file, never this one. */
+@import "./theme.css";
+
+/* The palette is one scheme, so `dark:` binds to an explicit class nothing
+   sets — not to the visitor's OS, which would repaint a page nobody designed. */
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  /* A fixed glow or a scaling ring that reaches past the right edge gives the
+     phone a strip to scroll into — the white line down the right of the page.
+     The page is clipped to its own width; nothing here is meant to travel. */
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: var(--body-line);
+    -webkit-font-smoothing: antialiased;
+    /* A long unbroken string — a place-joining line, an email address — has no
+       space to wrap at, so it runs its box wider than the column that holds it
+       and scrolls the page sideways at 360. Every text element breaks a run it
+       cannot fit, rather than only the paragraphs that remembered to ask. */
+    overflow-wrap: break-word;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: var(--heading-weight);
+    line-height: var(--heading-line);
+    letter-spacing: var(--heading-tracking);
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  /* The panel ground every card on this site is built on. A card is the pure
+     white surface, lifted off the warm-white page by the token's own shadow and
+     hairline — so text composed inside one is measured against --card, the
+     ground the tokens were tuned for, rather than against whatever section it
+     happens to sit in. */
+  .surface-card {
+    background: var(--card);
+    color: var(--card-foreground);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow);
+  }
+  /* The arrivals. Only two, and only where the element genuinely arrives: the
+     bar the visitor lands under, the hero copy rising once inside the
+     photograph it belongs to, and a single tap ripple. Everything else on the
+     site is a hover, a reveal, or the TrustBar's counters. transform and
+     opacity only, so nothing here costs layout. */
+  @keyframes bar-settle {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(1.25rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* The catalogue band's own arrival: the tint it is painted on opens up from
+     the centre while the cards on it settle. transform and opacity only, so a
+     section-level animation costs no layout. */
+  @keyframes band-open {
+    from { opacity: 0; transform: scale(1.04); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* A slow pass of light down a flyer, once, as it crosses into view. The card
+     it crosses leaves a translucent track under it, so the sheen has something
+     to travel along rather than being a flash of the whole panel. */
+  @keyframes card-sheen {
+    from { transform: translateY(-115%); }
+    to { transform: translateY(115%); }
+  }
+  /* A cover picture's own arrival on the catalogue. The card settles first and
+     the photograph opens out of its frame behind it, pulling back from a slight
+     over-scale, so the eye lands on the place rather than the panel around it.
+     transform and opacity only: the frame is a fixed box, so a photograph
+     growing inside it costs no layout at any width. */
+  @keyframes flyer-photo {
+    from { opacity: 0; transform: scale(1.06); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* The business name in the hero is set in the headline colour it inherits and
+     nothing else. The word animation that used to sweep a gold gradient across
+     it resolved the name to transparent wherever the sweep had not yet reached,
+     which is every frame before the delay ended — the first thing a visitor
+     reads was the one line on the page that could not be read. The headline is
+     no place for a pass that hides what it is passing over. */
+  @keyframes tap-ring {
+    from { opacity: 0.5; transform: scale(0.55); }
+    to { opacity: 0; transform: scale(1.6); }
+  }
+  /* The beacon on the two one-tap rounds. A ring leaves each button on the same
+     beat and fades as it goes, so the pair reads as lit rather than as two
+     discs waiting in a corner — the pair is the whole conversion path, and
+     nothing else on the site points at it. The icon inside never moves: it is
+     the thing being read, and a pulsing glyph is harder to aim at.
+     One cycle per 3s, so the beat has a rest between blinks and stops being
+     ambient noise. Only transform and opacity, so it costs no layout. */
+  @keyframes action-beacon {
+    0% { opacity: 0; transform: scale(0.66); }
+    10% { opacity: 0.65; }
+    70% { opacity: 0; transform: scale(1.3); }
+    100% { opacity: 0; transform: scale(1.3); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    /* A decorative sheen is not a transition, so the blanket rule above does not
+       reach it: with reduce asked for, it is not there at all. */
+    *, *::before, *::after {
+      animation-name: none !important;
+    }
+  }
+}
